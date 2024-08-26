@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--hola este es un comentario de linea-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Primera pagina creada</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css"
+          integrity="sha384-3fdgwJw17Bi87e1QQ4fsLn4rUFqWw//KU0g8TvV6quvahISRewev6/EocKNuJmEw" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10+Charted&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monofett&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <main class="container p-4">
+        <h1 class="display-5 text-center mt-4 handjet">Lista de tareas</h1>
+        <div class="row">
+            <div class="col-md-4 offset-md-4 my-auto"> <!--Este div ocupará 4 columnas del espacio (centrado)-->
+                <div class="card"> <!--Creacion del objeto card-->
+                    <div class="card-header r">
+                        <div id="current_date">
+                            <p>
+                            <script  >
+                                date = new Date();
+                                year = date.getFullYear();
+                                month = date.getMonth() + 1;
+                                day = date.getDate();
+                                document.getElementById("current_date").innerHTML = day + "/" + month + "/" + year;
+                            </script>
+                            </p>
+                            </div>
+                        <form action="/crear-tarea" method="post">
+                            <div class="from-group">
+                                <input type="text" name="contenido_tarea" placeholder="Tarea" class="form-control" autofocus>
+                                <input type="text" name="categoria_tarea" placeholder="Categoria" class="form-control">
+                                <input type="date" name="fecha_tarea" placeholder="Fecha Limite" min="2024-05-02" max="2024-08-30" class="form-control" ></div>
+                                <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                            </form>
+                        </a>
+                    </div>
+                    <div class="card-body ">
+                        <ul class="list-goup">
+                            {% for tarea in lista_de_tareas %}
+                            <li class="list-group-item text-right ">
+                                <span class='{% if tarea.hecha == true %} tarea_hecha {% endif %}'>
+                                    {{tarea.contenido}}
+                                </span>
+                            <a href ='/tarea-hecha/{{tarea.id}}' style="text-decoration:none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+                                </svg>
+                            </a>
+                            <a class='t btn-delete' href ='/eliminar-tarea/{{tarea.id}}' style="text-decoration:none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-x-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M6.854 6.146 8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 1 1 .708-.708"/>
+                                </svg>
+                                 </a>
+                            <a href ='/editar-tarea/{{tarea.id}}' style="text-decoration:none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                                </svg>
+                            </a>
+                            </li >
+                            <li class="list-group-item text-right r ">
+                                 <span class='{% if tarea.hecha == true %} tarea_hecha {% endif %}'>
+                                    {{tarea.categoria}}
+                                </span>
+                            </li >
+                             <li class="list-group text-right r ">
+                                 <span class='{% if tarea.hecha == true %} tarea_hecha {% endif %}'>
+                                     {{tarea.fecha}}
+                                </span>
+                             </li >
+                            <div>
+                                 <p> </p>
+                            </div>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

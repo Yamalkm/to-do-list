@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <title>Editar</title>
+ <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css"
+          integrity="sha384-3fdgwJw17Bi87e1QQ4fsLn4rUFqWw//KU0g8TvV6quvahISRewev6/EocKNuJmEw" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<main class="container p-4">
+        <h1 class="display-5 text-center mt-4 handjet ">Edición
+        </h1>
+        <div class="row">
+            <div class="col-md-4 offset-md-4 my-auto"> <!--Este div ocupará 4 columnas del espacio (centrado)-->
+                <div class="card"> <!--Creacion del objeto card-->
+                    <div class="card-header">
+                    <form action="/modificar/{{ tarea.id }}" method="post"> <!--Habilitamos el formulario con el boton-->
+                        <div class="form-group">
+                            <input type="text" name="editar-contenido"  placeholder="Tarea" class="form-control" autofocus>
+                            <input type="text" name="editar-categoria"  placeholder="Categoría" class="form-control" autofocus>
+                            <input type="date" name="editar-fecha" placeholder="Fecha Limite" min="2024-05-02" max="2024-08-30" class="form-control" >
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block boton" >
+                            Editar
+                        </button>
+                    </form>
+                        <form action="/p" method="post">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Volver
+                            </button>
+                        </form>
+</body>
+</html>
